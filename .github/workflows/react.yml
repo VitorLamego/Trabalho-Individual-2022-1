@@ -29,14 +29,10 @@ jobs:
         run: npm install
 
       - name: Build
-        run: |
-          docker-compose up -d --build client
-          docker exec GCES_Client npm run build
+        run: docker-compose up -d --build client
       
       - name: Lint
         run: docker exec GCES_Client npm run lint
 
       - name: Tests
-        run: cross-env CI=true npm run test
-        env:
-          CI: true
+        run: docker exec GCES_Client npm test --  --watchAll=false
