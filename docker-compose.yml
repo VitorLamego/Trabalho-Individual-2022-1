@@ -16,6 +16,7 @@ services:
     container_name: GCES_Server
     build:
       dockerfile: ./library_back/Dockerfile
+      context: ./
     volumes:
       - .:/code
     ports:
