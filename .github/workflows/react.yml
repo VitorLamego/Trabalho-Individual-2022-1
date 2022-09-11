@@ -17,25 +17,24 @@ jobs:
         node-version: [12.x]
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-    - name: Set up Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
 
-    - name: Install dependencies
-      run: npm install
+      - name: Install dependencies
+        run: npm install
 
-    - name: Build
-      # run: docker-compose up -d --build client
-      # run: docker exec -it GCES_Client npm build
-      run: npm build
-    
-    -name: Lint
-      run: npm run lint
+      - name: Build
+        run: |
+          docker-compose up -d --build client
+          docker exec GCES_Client npm run build
+      
+      - name: Lint
+        run: docker exec GCES_Client npm run lint
 
-    - name: Tests
-      # run: docker exec -it GCES_Client npm test
-      run: npm test
+      - name: Tests
+        run: docker exec GCES_Client npm run test
