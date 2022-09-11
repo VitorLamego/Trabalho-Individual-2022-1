@@ -39,3 +39,12 @@ services:
     depends_on:
       - "database"
       - "server"
+
+  nginx:
+    container_name: GCES_Nginx
+    restart: always
+    build: ./nginx
+    ports:
+      - 80:80
+    depends_on:
+      - server
