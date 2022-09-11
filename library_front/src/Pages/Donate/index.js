@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 
 const Donate = () => {
   const [bookName, setBookName] = useState('');
-  const [bookAuthor, setBookAuthor] = useState('');  
+  const [bookAuthor, setBookAuthor] = useState('');
   const [bookReleaseYear, setBookReleaseYear] = useState();
 
   const navigate = useNavigate();
@@ -34,7 +34,7 @@ const Donate = () => {
 
   useCallback(() => {
     createBook();
-  }, [sessionStorage.getItem('app-token')]);
+  }, []);
 
   return (
     <Background>
@@ -65,8 +65,8 @@ const Donate = () => {
           value={bookReleaseYear}
         />
         <Buttons>
-            <Button title="Cancelar" type="secondary" changeButton={cancel}/>
-            <Button title="Doar" type="primary" changeButton={submit}/>
+          <Button title="Cancelar" type="secondary" changeButton={cancel} />
+          <Button title="Doar" type="primary" changeButton={submit} />
         </Buttons>
       </Center>
     </Background>
