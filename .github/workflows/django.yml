@@ -28,5 +28,7 @@ jobs:
           flake8 --extend-ignore=E302,E101,E131,W191,W293,W292 --count --max-complexity=10 --max-line-length=226 --exclude=*.pyc,*migrations* --statistics library_back/src/
       - name: Build
         run: docker-compose up -d --build
+      - name: Run Migrations
+        run: docker exec GCES_Server bash -c "python manage.py makemigrations && python manage.py migrate"
       - name: Test
         run: docker exec GCES_Server bash -c "python ./manage.py test"
