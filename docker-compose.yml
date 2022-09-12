@@ -35,8 +35,8 @@ services:
     ports:
       - 3000:3000
     volumes:
-      - /app/node_modules
-      - ./client:/app
+      - /library_front/node_modules
+      - ./library_front:/app
     depends_on:
       - "database"
       - "server"
