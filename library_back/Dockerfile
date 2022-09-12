@@ -4,12 +4,11 @@ ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
 WORKDIR /library_back
-COPY ./library_back/ ./
-COPY ./library_back/requirements.txt ./
+COPY ./ ./
 
 RUN pip install -r requirements.txt
 
-ADD ./library_back/docker-entrypoint.sh ./docker-entrypoint.sh
+ADD ./docker-entrypoint.sh ./docker-entrypoint.sh
 
 RUN chmod a+x ./docker-entrypoint.sh
 ENTRYPOINT ["./docker-entrypoint.sh"]
