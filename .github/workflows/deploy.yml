@@ -6,9 +6,19 @@ on:
       - main
 
 jobs:
-  BackDeploy:
+  DockerImageDeploy:
+
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Push Heroku
-        run: git push -f https://heroku:${{secrets.HEROKU_API_KEY}}@git.heroku.com/${{secrets.HEROKU_APP_NAME}}.git origin/main:main
+      - name: Docker Login
+        env:
+          DOCKER_USER: ${{secrets.DOCKER_USER}}
+          DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
+        run: |
+          docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+      - name: Build Docker Image
+        run: docker build library_back --file ./library_back/Dockerfile
+        
+      - name: Docker push
+        run: docker push ${{secrets.DOCKER_USER}}/trabalho_gces
